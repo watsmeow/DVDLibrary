@@ -13,6 +13,7 @@ function DVDDetails() {
     const [data, error] = useFetch(url);
     const [updateDVDData, setupdateDVDData] = useState(data);
     const [editing, setEditing] = useState(true);
+
   
     useEffect(() => {
       setupdateDVDData(data);

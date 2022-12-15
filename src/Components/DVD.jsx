@@ -1,17 +1,18 @@
 import contactImgUrl from '../Images/contact.png';
 import {useNavigate} from "react-router-dom";
 
-function DVD({ imgSrc = contactImgUrl, id, title, releaseYear, director, rating, notes }) {
+function DVD({ imgSrc = contactImgUrl, id, title, releaseYear, director, rating, notes, setDeleteDVD}) {
+
 
   const navigate = useNavigate();
   let url = `http://dvd-library.us-east-1.elasticbeanstalk.com/dvd/${id}`;
-  
+
+
   async function deleteContact() {
     await fetch(url, {
       method: "DELETE",
     });
-
-    navigate("/");
+      setDeleteDVD(true)
   }
 
   return (
@@ -35,7 +36,8 @@ function DVD({ imgSrc = contactImgUrl, id, title, releaseYear, director, rating,
         </button>
         <button
           className=" w-3 m-auto lg:w-1/6 text-center text-lg py-4 px-6 rounded-full border-2 lg:mr-16 text-gray-100 border-green-600 bg-green-600 hover:bg-gray-50 hover:border-green-600  hover:text-green-600 hover:shadow-2xl"
-          onClick={(deleteContact)}>
+          onClick={(deleteContact)}
+          >
             Delete
         </button>
     </figure>

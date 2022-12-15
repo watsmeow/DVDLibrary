@@ -1,14 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import DVD from "./DVD";
 import useFetch from "../Hooks/useFetch";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Search() {
+
+  let url ="http://dvd-library.us-east-1.elasticbeanstalk.com/dvds";
+  const [data, error] = useFetch(url);
+
+  const [deleteDVD, setDeleteDVD] = useState(false)
+
   const [usersSearch, setUsersSearch] = useState("");
   const [userHasSearched, setUserHasSearched] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const [dvdData] = useFetch("http://dvd-library.us-east-1.elasticbeanstalk.com/dvds");
+  const [dvdList, setDVDList] = useState(data);
+
+
+  useEffect(() => {
+    setDeleteDVD(false);
+    refreshDVDData();
+  }, [deleteDVD])
+  
+  async function refreshDVDData() {
+    const response = await axios.get(url);
+    setDVDList([...response.data]);
+  }
 
   function filterdvdData(searchTerm) {
     setUserHasSearched(true);
@@ -20,7 +38,7 @@ function Search() {
       filteredResults = [];
       setUserHasSearched(false);
     } else {
-      filteredResults = dvdData.filter((dvd) => {
+      filteredResults = dvdList.filter((dvd) => {
         return dvd.title.includes(searchTerm) || dvd.title.includes(searchTerm);
       });
     }
@@ -28,16 +46,6 @@ function Search() {
     setSearchResults(filteredResults);
   }
 
-
-
-    
-  async function deleteContact() {
-    await fetch(url, {
-      method: "DELETE",
-    });
-
-    navigate("/");
-  }
 
   return (
     <div>
@@ -95,10 +103,14 @@ function Search() {
           </>
         ) : (
           <div className="flex flex-col gap-2 place-items-center">
-            {dvdData.map((dvd) => {
+            {dvdList.map((dvd) => {
               return (
-                <div key={dvd.id} className="flex flex-row">
+                <div 
+                key={dvd.id} 
+                className="flex flex-row"
+                >
                   <DVD
+                      setDeleteDVD={setDeleteDVD}
                       id={dvd.id}
                       title={dvd.title}
                       releaseYear={dvd.releaseYear}
