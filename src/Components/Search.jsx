@@ -28,6 +28,17 @@ function Search() {
     setSearchResults(filteredResults);
   }
 
+
+
+    
+  async function deleteContact() {
+    await fetch(url, {
+      method: "DELETE",
+    });
+
+    navigate("/");
+  }
+
   return (
     <div>
       {/* Create DVD and Search options */}
@@ -35,7 +46,7 @@ function Search() {
       <nav className="w-full m-8">
         <Link
           to="/create"
-          className=" w-3 m-auto lg:w-1/6 text-center text-lg py-4 px-6 rounded-full border-2 lg:mr-16 text-gray-100 border-green-600 bg-green-600 hover:bg-gray-50 hover:border-green-600  hover:text-green-600 hover:shadow-2xl  "
+          className=" w-3 m-auto lg:w-1/6 text-center text-lg py-4 px-6 rounded-full border-2 lg:mr-16 text-gray-100 border-green-600 bg-green-600 hover:bg-gray-50 hover:border-green-600  hover:text-green-600 hover:shadow-2xl"
         >
           {" "}
           Create DVD
@@ -70,6 +81,7 @@ function Search() {
                 return (
                   <Link key={dvd.id} to={`/${dvd.id}`}>
                     <DVD
+                      id={dvd.id}
                       title={dvd.title}
                       releaseYear={dvd.releaseYear}
                       director={dvd.director}
@@ -85,15 +97,16 @@ function Search() {
           <div className="flex flex-col gap-2 place-items-center">
             {dvdData.map((dvd) => {
               return (
-                <Link key={dvd.id} to={`/${dvd.id}`}>
+                <div key={dvd.id} className="flex flex-row">
                   <DVD
+                      id={dvd.id}
                       title={dvd.title}
                       releaseYear={dvd.releaseYear}
                       director={dvd.director}
                       rating={dvd.rating}
                       notes={dvd.notes}
                   />
-                </Link>
+                </div>
               );
             })}
           </div>
