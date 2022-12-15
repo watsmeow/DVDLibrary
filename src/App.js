@@ -1,24 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import DVD from './Components/DVD';
+import SearchBar from './Components/SearchBar';
+import Search from './Components/Search';
+import { Routes, Route } from "react-router-dom";
+import CreateDVD from './Components/CreateDVD';
+import DVDDetails from './Components/DVDDetails';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+     	 <Route path="/" element={<Search />} />
+        <Route path="/:id" element={<DVDDetails />} />
+        <Route path="/create" element={<CreateDVD />} />
+      </Routes>
+    </>
   );
 }
 
