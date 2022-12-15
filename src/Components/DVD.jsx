@@ -1,5 +1,5 @@
 import contactImgUrl from '../Images/contact.png';
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function DVD({ imgSrc = contactImgUrl, id, title, releaseYear, director, rating, notes }) {
 
