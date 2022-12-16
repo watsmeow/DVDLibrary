@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
+import DropDown from "./DropDown";
 import DVD from "./DVD";
 import useFetch from "../Hooks/useFetch";
 import { Link } from "react-router-dom";
@@ -60,6 +61,7 @@ function Search() {
           Create DVD
         </Link>
       </nav>
+      <DropDown />
       <SearchBar searchValue={usersSearch} searchValueFunction={filterdvdData} />
     </div>
 
