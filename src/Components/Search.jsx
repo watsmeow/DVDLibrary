@@ -66,7 +66,10 @@ function Search() {
     </div>
 
       {/* List of all or searched DVDs or error */}
-      <section className="flex justify-center m-4 w-screen">
+      <section className="flex flex-col justify-center m-4 w-screen">
+      <div className="flex flex-col gap-2 place-items-center">
+          <h1>DVD Information</h1>
+        </div>
         {userHasSearched ? (
           <>
             <div
@@ -89,8 +92,11 @@ function Search() {
             >
               {searchResults.map((dvd) => {
                 return (
-                  <Link key={dvd.id} to={`/${dvd.id}`}>
+                  <Link key={dvd.id} 
+                  className="flex flex-row w-screen justify-center"
+                  to={`/${dvd.id}`}>
                     <DVD
+                      setDeleteDVD={setDeleteDVD}
                       id={dvd.id}
                       title={dvd.title}
                       releaseYear={dvd.releaseYear}
@@ -109,7 +115,7 @@ function Search() {
               return (
                 <div 
                 key={dvd.id} 
-                className="flex flex-row"
+                className="flex flex-row w-screen justify-center"
                 >
                   <DVD
                       setDeleteDVD={setDeleteDVD}
