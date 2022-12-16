@@ -82,33 +82,34 @@ function Search() {
   return (
     <div>
       {/* Create DVD and Search options */}
-      <div className="grid grid-cols-2 gap-2 place-items-center m-4">
-      <nav className="w-full m-8">
-        <Link
-          to="/create"
-          className=" w-3 m-auto lg:w-1/6 text-center text-lg py-4 px-6 rounded-full border-2 lg:mr-16 text-gray-100 border-green-600 bg-green-600 hover:bg-gray-50 hover:border-green-600  hover:text-green-600 hover:shadow-2xl"
-        >
-          {" "}
-          Create DVD
-        </Link>
-      </nav>
-      {/* Search Category Drop Down*/}
-      <select
-        className="flex px-4 border-2 border-gray-300 rounded-md
-      justify-between hover:shadow-lg focus:shadow-lg"
-        value={searchCategory}
-        onChange={(e) => setSearchCategory(e.target.value)}
-      >
-        {options.map(option => (
-          <option
-            key={option.value}
-            value={option.value}
-            disabled={option.disabled}
+      <div className="grid grid-cols-3 gap-2 place-items-center m-4">
+        <nav className="w-full m-8">
+          <Link
+            to="/create"
+            className=" w-3 m-auto lg:w-1/6 text-center text-lg py-4 px-6 rounded-full border-2 lg:mr-16 text-gray-100 border-green-600 bg-green-600 hover:bg-gray-50 hover:border-green-600  hover:text-green-600 hover:shadow-2xl"
           >
-            {option.text}
-          </option>
-        ))}
-      </select>
+            {" "}
+            Create DVD
+          </Link>
+        </nav>
+      {/* Search Category Drop Down*/}
+        <select
+          className="flex px-4 py-4 border-2 border-gray-300 rounded-md
+        justify-between hover:shadow-lg focus:shadow-lg"
+          value={searchCategory}
+          onChange={(e) => setSearchCategory(e.target.value)}
+        >
+          {options.map(option => (
+            <option
+              key={option.value}
+              value={option.value}
+              disabled={option.disabled}
+              className="py-2 flex-auto focus:outline-none w-36"
+            >
+              {option.text}
+            </option>
+          ))}
+        </select>
 
       <SearchBar searchValue={usersSearch} searchValueFunction={filterdvdData} />
     </div>
@@ -116,7 +117,7 @@ function Search() {
       {/* List of all or searched DVDs or error */}
       <section className="flex flex-col justify-center m-4 w-screen">
       <div className="flex flex-col gap-2 place-items-center">
-          <h1>DVD Information</h1>
+          <h1 className="text-xl font-bold my-2">DVD Information</h1>
         </div>
         {userHasSearched ? (
           <>
