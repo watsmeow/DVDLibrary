@@ -44,7 +44,7 @@ function Search() {
 
     let filteredResults;
 
-    if (searchTerm == "") {
+    if (searchTerm === "") {
       filteredResults = [];
       setUserHasSearched(false);
     } else {
@@ -70,14 +70,9 @@ function Search() {
           })
           break;
       }
-      // filteredResults = dvdList.filter((dvd) => {
-      //   return dvd.title.includes(searchTerm) || dvd.title.includes(searchTerm);
-      // });
     }
-
     setSearchResults(filteredResults);
   }
-
 
   return (
     <div>
@@ -130,7 +125,8 @@ function Search() {
               role="alert"
             >
               <p className="text-center">
-                <strong>Sorry!</strong> There are no dvds with the name of{" "}
+                <strong>Sorry!</strong> There are no dvds matching Category:{" "}
+                <strong>{searchCategory}</strong>, Search:{" "}
                 <strong>{usersSearch}</strong>
               </p>
             </div>
