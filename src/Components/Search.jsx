@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
-import DropDown from "./DropDown";
 import DVD from "./DVD";
 import useFetch from "../Hooks/useFetch";
 import { Link } from "react-router-dom";
@@ -9,6 +8,16 @@ import axios from "axios";
 function Search() {
 
   let url ="http://dvd-library.us-east-1.elasticbeanstalk.com/dvds";
+
+  const options = [
+    {value: "", text: "Search Category", disabled: "true"},
+    {value: "title", text: "Title", disabled: ""},
+    {value: "releaseYear", text: "Release Year", disabled: ""},
+    {value: "director", text: "Director Name", disabled: ""},
+    {value: "rating", text: "Rating", disabled: ""}
+  ];
+  const [searchCategory, setSearchCategory] = useState(options[0].value);
+
   const [data, error] = useFetch(url);
 
   const [deleteDVD, setDeleteDVD] = useState(false)
@@ -39,9 +48,31 @@ function Search() {
       filteredResults = [];
       setUserHasSearched(false);
     } else {
-      filteredResults = dvdList.filter((dvd) => {
-        return dvd.title.includes(searchTerm) || dvd.title.includes(searchTerm);
-      });
+      switch (searchCategory) {
+        case "title":
+          filteredResults = dvdList.filter((dvd) => {
+            return dvd.title.includes(searchTerm);
+          })
+          break;
+        case "releaseYear":
+          filteredResults = dvdList.filter((dvd) => {
+            return dvd.releaseYear.includes(searchTerm);
+          })
+          break;
+        case "director":
+          filteredResults = dvdList.filter((dvd) => {
+            return dvd.director.includes(searchTerm);
+          })
+          break;
+        case "rating":
+          filteredResults = dvdList.filter((dvd) => {
+            return dvd.rating.includes(searchTerm);
+          })
+          break;
+      }
+      // filteredResults = dvdList.filter((dvd) => {
+      //   return dvd.title.includes(searchTerm) || dvd.title.includes(searchTerm);
+      // });
     }
 
     setSearchResults(filteredResults);
@@ -61,7 +92,24 @@ function Search() {
           Create DVD
         </Link>
       </nav>
-      <DropDown />
+      {/* Search Category Drop Down*/}
+      <select
+        className="flex px-4 border-2 border-gray-300 rounded-md
+      justify-between hover:shadow-lg focus:shadow-lg"
+        value={searchCategory}
+        onChange={(e) => setSearchCategory(e.target.value)}
+      >
+        {options.map(option => (
+          <option
+            key={option.value}
+            value={option.value}
+            disabled={option.disabled}
+          >
+            {option.text}
+          </option>
+        ))}
+      </select>
+
       <SearchBar searchValue={usersSearch} searchValueFunction={filterdvdData} />
     </div>
 
