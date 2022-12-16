@@ -16,10 +16,10 @@ function DVD({ imgSrc = contactImgUrl, id, title, releaseYear, director, rating,
   }
 
   return (
-    <figure className="flex flex-row justify-between items-center gap-2 bg-gray-50  rounded-xl p-8 space-y-2 shadow-xl ">
+    <figure className="w-11/12 flex flex-row justify-between items-center gap-2 bg-gray-50  rounded-xl p-8 space-y-2 shadow-xl ">
       <div>
         <img
-          className="w-24 h-24 rounded-full"
+          className="min-w-24 min-h-24 max-w-24 max-h-24 rounded-full"
           src={imgSrc}
           alt="the contact's headshot"
         />
@@ -28,18 +28,21 @@ function DVD({ imgSrc = contactImgUrl, id, title, releaseYear, director, rating,
       <p className="font-light text-gray-500">{releaseYear}</p>
       <p className="font-light text-gray-500">{director}</p>
       <p className="font-light text-gray-500">{rating}</p>
-      <p className="font-light text-gray-500">{notes}</p>                 
-      <button
-          className=" w-3 m-auto lg:w-1/6 text-center text-lg py-4 px-6 rounded-full border-2 lg:mr-16 text-gray-100 border-green-600 bg-green-600 hover:bg-gray-50 hover:border-green-600  hover:text-green-600 hover:shadow-2xl"
+      <p className="font-light text-gray-500">{notes}</p>  
+      <div className='flex flex-row justify-between gap-2'>      
+        <button
+          className="m-auto  text-center text-lg py-4 px-6 rounded-full border-2 text-gray-100 border-green-600 bg-green-600 hover:bg-gray-50 hover:border-green-600  hover:text-green-600 hover:shadow-2xl"
           onClick={() => navigate(`/${id}`)}>
             Edit
         </button>
         <button
-          className=" w-3 m-auto lg:w-1/6 text-center text-lg py-4 px-6 rounded-full border-2 lg:mr-16 text-gray-100 border-green-600 bg-green-600 hover:bg-gray-50 hover:border-green-600  hover:text-green-600 hover:shadow-2xl"
+          className="m-auto text-center text-lg py-4 px-6 rounded-full border-2 text-gray-100 border-red-600 bg-red-600 hover:bg-gray-50 hover:border-green-600  hover:text-red-600 hover:shadow-2xl"
           onClick={(deleteContact)}
           >
             Delete
         </button>
+        </div>               
+
     </figure>
   );
 }
